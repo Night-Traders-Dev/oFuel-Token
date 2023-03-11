@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>oFuel Frontend</title>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <h1>oFuel Contract Interaction</h1>
+    <p>Your account: <span id="account"></span></p>
+    <p>Current oFuel balance: <span id="balance"></span></p>
+    <form>
+        <label for="recipient">Recipient Address:</label>
+        <input type="text" id="recipient" name="recipient" required>
+        <br>
+        <label for="amount">Amount:</label>
+        <input type="text" id="amount" name="amount" required>
+        <br>
+        <button type="submit" id="transfer-btn">Transfer</button>
+    </form>
+
+    <script src="./index.js"></script>
+</body>
+</html>

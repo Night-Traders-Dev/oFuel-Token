@@ -8,7 +8,7 @@ import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
-import "@openzeppelin/contracts/security/TimelockController.sol";
+import "@openzeppelin/contracts/governance/TimelockController.sol";
 
 contract OFuelToken is IERC20, IERC20Metadata, AccessControl, Pausable, TimelockController {
     using SafeMath for uint256;
