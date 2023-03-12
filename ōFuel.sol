@@ -24,10 +24,10 @@ contract OFuelToken is IERC20, IERC20Metadata, AccessControl, Pausable, Timelock
     
     bytes32 public constant BURNER_ROLE = keccak256("BURNER_ROLE");
 
-    constructor() IERC20Metadata("ōFuel", "OFUEL") TimelockController(2 days) {
+    constructor() IERC20Metadata("oFuel", "OFUEL") TimelockController(2 days) {
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _setupRole(BURNER_ROLE, msg.sender);
-        _name = "ōFuel";
+        _name = "oFuel";
         _symbol = "OFUEL";
         _totalSupply = 100000000000000000000000000; // 100 billion tokens with 18 decimals
         _balances[msg.sender] = _totalSupply;
