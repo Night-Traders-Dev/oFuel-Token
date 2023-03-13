@@ -4,14 +4,15 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract oFuel is ERC20 {
-    uint256 private constant STAKING_REWARD = 5; // 5% staking reward
+    uint256 private constant STAKING_REWARD = 7; // 7% staking reward
     uint256 private constant DECIMALS_MULTIPLIER = 10 ** 18; // number of decimals in 1 token
     uint256 private totalStaked;
+    address public contractPool;
     mapping(address => uint256) private stakedBalances;
     mapping(address => uint256) private stakedTimes;
 
     constructor(uint256 initialSupply) ERC20("oFuel", "OFUEL") {
-        _mint(msg.sender, initialSupply * DECIMALS_MULTIPLIER);
+        _mint(contractPool, initialSupply * DECIMALS_MULTIPLIER);
     }
 
     function stake(uint256 amount) public {
