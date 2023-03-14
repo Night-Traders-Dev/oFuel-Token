@@ -21,33 +21,56 @@ contract Staking {
     }
 
     function stake(uint256 amount, uint256 lockDuration) external {
-        require(amount > 0, "Amount cannot be zero");
 
-        uint256 interestRate;
-        if (lockDuration == 90 days) {
-            interestRate = 500; // 5% APR
-        } else if (lockDuration == 180 days) {
-            interestRate = 798; // 7.98% APR
-        } else if (lockDuration == 365 days) {
-            interestRate = 1475; // 14.75% APR
-        } else {
-            revert("Invalid lock duration");
-        }
+      require(amount > 0, "Amount cannot be zero");
 
-        // Transfer the tokens from the user to the contract
-        require(oQuarkToken.transferFrom(msg.sender, address(this), amount), "Transfer failed");
+      uint256 interestRate;
 
-        // Add the stake to the user's stakes
-        stakes[msg.sender].push(Stake({
-            amount: amount,
-            timestamp: block.timestamp,
-            lockDuration: lockDuration,
-            interestRate: interestRate
-        }));
+      if (lockDuration == 90 days) {
 
-        // Update the total staked amount
-        totalStaked += amount;
-    }
+        interestRate = 500; // 5% APR
+
+      } else if (lockDuration == 180 days) {
+
+        interestRate = 798; // 7.98% APR
+
+      } else if (lockDuration == 365 days) {
+
+        interestRate = 1475; // 14.75% APR
+
+      } else {
+
+        revert("Invalid lock duration");
+
+      }
+
+      // Check that the contract has sufficient allowance to transfer tokens from the user's wallet
+
+      require(oQuarkToken.allowance(msg.sender, address(this)) >= amount, "Insufficient allowance");
+
+      // Transfer the tokens from the user to the contract
+
+      require(oQuarkToken.transferFrom(msg.sender, address(this), amount), "Transfer failed");
+
+      // Add the stake to the user's stakes
+
+      stakes[msg.sender].push(Stake({
+
+        amount: amount,
+
+        timestamp: block.timestamp,
+
+        lockDuration: lockDuration,
+
+        interestRate: interestRate
+
+    }));
+
+    // Update the total staked amount
+
+    totalStaked += amount;
+
+}
 
     function unstake(uint256 stakeIndex) external {
         Stake storage stake = stakes[msg.sender][stakeIndex];
