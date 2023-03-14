@@ -11,7 +11,8 @@ contract oFuel is ERC20 {
     mapping(address => uint256) private stakedBalances;
     mapping(address => uint256) private stakedTimes;
 
-    constructor(uint256 initialSupply) ERC20("oFuel", "OFUEL") {
+    constructor(uint256 initialSupply, address contractPool_) ERC20("oFuel", "OFUEL") {
+        contractPool = contractPool_
         _mint(contractPool, initialSupply * DECIMALS_MULTIPLIER);
     }
 
